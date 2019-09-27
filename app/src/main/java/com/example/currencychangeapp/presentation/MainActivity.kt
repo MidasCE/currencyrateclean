@@ -1,7 +1,8 @@
-package com.example.currencychangeapp
+package com.example.currencychangeapp.presentation
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.currencychangeapp.R
 
 class MainActivity : AppCompatActivity() {
 
