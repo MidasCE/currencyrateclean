@@ -37,8 +37,10 @@ dependencies {
     implementation applicationDependencies.appCompat
     implementation applicationDependencies.core
     implementation applicationDependencies.constraintLayout
+    implementation applicationDependencies.recyclerview
     implementation applicationDependencies.dagger
     implementation applicationDependencies.daggerSupport
+    kapt applicationDependencies.daggerProcessor
     implementation applicationDependencies.retrofit
     implementation applicationDependencies.rxJava
     implementation applicationDependencies.rxAndroid
