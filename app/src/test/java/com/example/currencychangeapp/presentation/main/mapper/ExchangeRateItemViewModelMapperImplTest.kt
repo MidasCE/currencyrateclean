@@ -19,11 +19,12 @@ class ExchangeRateItemViewModelMapperImplTest {
 
     @Test
     fun `Test map`() {
+        val amount = 3.1f
         val exchangeRate = ExchangeRate("currency", 1f)
-        val result = exchangeRateItemViewModelMapperImpl.map(exchangeRate)
+        val result = exchangeRateItemViewModelMapperImpl.map(amount, exchangeRate)
 
         result.currencyCode.`should equal`(exchangeRate.currency)
-        result.exchangeRate.`should equal`(exchangeRate.rate)
+        result.exchangeAmount.`should equal`(amount * exchangeRate.rate)
     }
 }
 

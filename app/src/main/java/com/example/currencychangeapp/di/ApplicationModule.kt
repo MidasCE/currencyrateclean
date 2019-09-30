@@ -2,6 +2,7 @@ package com.example.currencychangeapp.di
 
 import android.app.Application
 import android.content.Context
+import com.example.currencychangeapp.App
 import com.example.currencychangeapp.presentation.core.SchedulerFactory
 import com.example.currencychangeapp.presentation.core.SchedulerFactoryImpl
 import dagger.Module
@@ -16,7 +17,8 @@ import javax.inject.Singleton
 class ApplicationModule {
 
     @Provides
-    fun provideContext(application: Application): Context = application
+    @Singleton
+    fun provideContext(app: Application): Context = app
 
     @Provides
     @Singleton

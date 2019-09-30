@@ -5,7 +5,7 @@ import com.example.currencychangeapp.presentation.main.model.ExchangeRateItemVie
 
 class ExchangeRateItemViewModelMapperImpl : ExchangeRateItemViewModelMapper {
 
-    override fun map(exchangeRate: ExchangeRate): ExchangeRateItemViewModel =
-        ExchangeRateItemViewModel(exchangeRate.currency, "", exchangeRate.rate)
+    override fun map(amount: Float, exchangeRate: ExchangeRate): ExchangeRateItemViewModel =
+        ExchangeRateItemViewModel(exchangeRate.currency, "", amount * exchangeRate.rate)
 
 }

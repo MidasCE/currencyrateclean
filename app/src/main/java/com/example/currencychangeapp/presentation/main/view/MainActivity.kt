@@ -9,13 +9,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.currencychangeapp.R
 import com.example.currencychangeapp.presentation.main.model.ExchangeRateItemViewModel
 import com.example.currencychangeapp.presentation.main.presenter.MainActivityPresenter
+import com.example.currencychangeapp.presentation.main.view.adapter.ExchangeRateItemAdapter
+import com.example.currencychangeapp.presentation.main.view.adapter.OnAmountChangedListener
 import dagger.android.AndroidInjection
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasAndroidInjector
 import javax.inject.Inject
 
-class MainActivity : MainView, AppCompatActivity(), HasAndroidInjector {
+class MainActivity : MainView, AppCompatActivity(), HasAndroidInjector, OnAmountChangedListener {
 
     @Inject
     lateinit var presenter: MainActivityPresenter
@@ -35,7 +37,7 @@ class MainActivity : MainView, AppCompatActivity(), HasAndroidInjector {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         initView()
-        presenter.loadExchangeRate("EU")
+        presenter.loadExchangeRate("EUR", 1F)
     }
 
     private fun initView() {
@@ -50,15 +52,12 @@ class MainActivity : MainView, AppCompatActivity(), HasAndroidInjector {
     }
 
     override fun updateExchangeRate(list: List<ExchangeRateItemViewModel>) {
-        val inFromBottom = TranslateAnimation(
-            Animation.RELATIVE_TO_PARENT, 0.0f, Animation.RELATIVE_TO_PARENT, 0.0f,
-            Animation.RELATIVE_TO_PARENT, +1.0f, Animation.RELATIVE_TO_PARENT, 0.0f
-        )
-        inFromBottom.duration = 1000
-        exhangeRateRecyclerView.startAnimation(inFromBottom)
-
-        adapter.exchangeRateItemList = list
+        adapter.exchangeRateItemList = list.toMutableList()
         adapter.notifyDataSetChanged()
+    }
+
+    override fun onAmountChanged(base: String, amount: Float) {
+        presenter.loadExchangeRate(base, amount)
     }
 
     override fun showLoading() {

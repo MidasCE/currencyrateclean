@@ -5,5 +5,5 @@ import com.example.currencychangeapp.presentation.main.model.ExchangeRateItemVie
 
 interface ExchangeRateItemViewModelMapper {
 
-    fun map(exchangeRate: ExchangeRate): ExchangeRateItemViewModel
+    fun map(amount: Float, exchangeRate: ExchangeRate): ExchangeRateItemViewModel
 }
