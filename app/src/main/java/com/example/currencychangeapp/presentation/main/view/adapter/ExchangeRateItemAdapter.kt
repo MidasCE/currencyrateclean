@@ -58,6 +58,7 @@ class ExchangeRateItemAdapter(
             )
         holder.currencyAmountEditText.setText(exchangeRateItemList[position].exchangeAmount.toString())
 
+      
 
     }
 

@@ -7,6 +7,6 @@ class CurrencyFlagResourceMapperImpl(private val context: Context) :
 
     override fun getCurrencyFlagResId(currencyCode: String): Int
             = context.resources.getIdentifier(
-            "ic_" + currencyCode + "_flag", "drawable", context.packageName)
+            currencyCode + "_flag", "drawable", context.packageName)
 
 }
