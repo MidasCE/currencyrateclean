@@ -1,6 +1,6 @@
 package com.example.currencychangeapp.presentation.main.view.adapter
 
-interface OnAmountChangedListener {
+interface OnBaseExchangeDetailChangedListener {
 
     fun onAmountChanged(base: String, amount: Float)
 }

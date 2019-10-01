@@ -1,6 +1,7 @@
 package com.example.currencychangeapp.presentation.main.presenter
 
 import com.example.currencychangeapp.domain.interactor.GetExchangeRateInteractor
+import com.example.currencychangeapp.domain.model.ExchangeRate
 import com.example.currencychangeapp.presentation.core.SchedulerFactory
 import com.example.currencychangeapp.presentation.main.view.MainView
 import io.reactivex.disposables.CompositeDisposable
@@ -15,27 +16,27 @@ class MainActivityPresenterImpl(
     private val mainView: MainView
 ) : MainActivityPresenter {
 
-    private var currentBase = ""
 
     private var compositeDisposable = CompositeDisposable()
 
-    override fun loadExchangeRate(base: String, amount: Float) {
-        currentBase = base
+    override fun loadExchangeRate(base : String, amount: Float) {
         mainView.showLoading()
+        compositeDisposable.clear()
         val disposable = Observable.interval(1, TimeUnit.SECONDS).flatMap {
-                getExchangeRateInteractor.getExchangeRateDetail(currentBase).toObservable()
+                getExchangeRateInteractor.getExchangeRateDetail(base).toObservable()
             }
             .subscribeOn(schedulerFactory.io())
             .observeOn(schedulerFactory.main())
             .subscribe({ rateDetail ->
-                val list = rateDetail.exchangeRateList.map {
+                val exchangeRateList = rateDetail.exchangeRateList.toMutableList()
+                exchangeRateList.add(0, ExchangeRate(base, 1F))
+                val list = exchangeRateList.map {
                     viewModelMapper.map(amount, it)
                 }
                 mainView.updateExchangeRate(list)
             }, {
                 mainView.showError()
             })
-
         compositeDisposable.add(disposable)
     }
 
