@@ -1,6 +1,9 @@
 package com.example.currencychangeapp.di
 
 import com.example.currencychangeapp.data.api.ExchangeRateAPI
+import com.example.currencychangeapp.data.pref.ExchangeRatePreferences
+import com.example.currencychangeapp.data.pref.ExchangeRatePreferencesImpl
+import com.example.currencychangeapp.data.pref.SharedPreferencesProvider
 import com.example.currencychangeapp.data.repository.ExchangeRateRepository
 import com.example.currencychangeapp.data.repository.ExchangeRateRepositoryImpl
 import com.example.currencychangeapp.data.serializer.DateDeserializer
@@ -16,7 +19,7 @@ import java.util.*
 import javax.inject.Singleton
 
 @Module
-class NetworkModule {
+class DataModule {
 
     @Provides
     @Singleton
@@ -40,7 +43,15 @@ class NetworkModule {
 
     @Provides
     @Singleton
-    fun provideExchangeRateRepository(api: ExchangeRateAPI): ExchangeRateRepository
-            = ExchangeRateRepositoryImpl(api)
+    fun provideExchangeRateRepository(api: ExchangeRateAPI,
+                                      preferences: ExchangeRatePreferences): ExchangeRateRepository
+            = ExchangeRateRepositoryImpl(api, preferences)
+
+    @Provides
+    @Singleton
+    fun provideTokenPreferences(gson: Gson,
+                                sharedPreferencesProvider: SharedPreferencesProvider): ExchangeRatePreferences
+            = ExchangeRatePreferencesImpl(gson, sharedPreferencesProvider)
+
 
 }

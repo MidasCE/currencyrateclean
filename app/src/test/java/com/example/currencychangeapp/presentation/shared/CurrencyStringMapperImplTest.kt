@@ -1,4 +1,4 @@
-package com.example.currencychangeapp.presentation.main.mapper
+package com.example.currencychangeapp.presentation.shared
 
 import android.content.Context
 import android.content.res.Resources

@@ -35,7 +35,7 @@ class MainActivityPresenterImpl(
     }
 
     private fun fetchExchangeRate(base: String): Disposable {
-        return Observable.interval(1, TimeUnit.SECONDS).flatMap {
+        return Observable.interval(1, TimeUnit.SECONDS, schedulerFactory.io()).flatMap {
             getExchangeRateInteractor.getExchangeRateDetail(base).toObservable()
         }
             .subscribeOn(schedulerFactory.io())
@@ -49,6 +49,7 @@ class MainActivityPresenterImpl(
                 mainView.hideLoading()
                 mainView.updateExchangeRate(list)
             }, {
+                mainView.hideLoading()
                 mainView.showError()
             })
     }

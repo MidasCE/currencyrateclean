@@ -3,6 +3,8 @@ package com.example.currencychangeapp.di
 import android.app.Application
 import android.content.Context
 import com.example.currencychangeapp.App
+import com.example.currencychangeapp.data.pref.SharedPreferencesProvider
+import com.example.currencychangeapp.data.pref.SharedPreferencesProviderImpl
 import com.example.currencychangeapp.presentation.core.SchedulerFactory
 import com.example.currencychangeapp.presentation.core.SchedulerFactoryImpl
 import dagger.Module
@@ -36,4 +38,9 @@ class ApplicationModule {
                                 @Named("main") mainScheduler : Scheduler
     ): SchedulerFactory
             = SchedulerFactoryImpl(ioScheduler, mainScheduler)
+
+    @Provides
+    @Singleton
+    fun provideSharedPreferencesProvider(context: Context): SharedPreferencesProvider
+            = SharedPreferencesProviderImpl(context)
 }

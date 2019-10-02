@@ -21,7 +21,7 @@ import javax.inject.Singleton
         ActivityBindingModule::class,
         PresentationModule::class,
         DomainModule::class,
-        NetworkModule::class
+        DataModule::class
     ]
 )
 interface AppComponent {
