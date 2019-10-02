@@ -48,10 +48,6 @@ class ExchangeRateItemAdapter(
         )
     }
 
-   // override fun getItemId(position: Int): Long {
-  //      return position.toLong()
-  //  }
-
     override fun getItemCount(): Int = exchangeRatePositionList.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -110,7 +106,7 @@ class ExchangeRateItemAdapter(
                             exchangeRatePositionList.add(0, it)
                         }
                         notifyItemMoved(currentPosition, 0)
-                        onBaseExchangeDetailChangedListener.onAmountChanged(
+                        onBaseExchangeDetailChangedListener.onBaseChanged(
                             viewModel.currencyCode,
                             viewModel.exchangeAmount
                         )
@@ -132,7 +128,6 @@ class ExchangeRateItemAdapter(
                     if (currencyAmountEditText.isFocused) {
                         charSequence?.takeIf { it.isNotEmpty() }?.let {
                             onBaseExchangeDetailChangedListener.onAmountChanged(
-                                currencyCode,
                                 it.toString().toFloat()
                             )
                         }

@@ -4,5 +4,7 @@ interface MainActivityPresenter {
 
     fun loadExchangeRate(base : String, amount: Float)
 
+    fun updateBaseAmount(amount: Float)
+
     fun onActivityDestroy()
 }

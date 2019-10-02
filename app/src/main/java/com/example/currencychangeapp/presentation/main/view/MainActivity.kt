@@ -2,6 +2,9 @@ package com.example.currencychangeapp.presentation.main.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View.GONE
+import android.view.View.VISIBLE
+import android.widget.ProgressBar
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.currencychangeapp.R
@@ -15,6 +18,7 @@ import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasAndroidInjector
 import javax.inject.Inject
 import androidx.recyclerview.widget.SimpleItemAnimator
+import com.google.android.material.snackbar.Snackbar
 
 class MainActivity : MainView, AppCompatActivity(), HasAndroidInjector, OnBaseExchangeDetailChangedListener {
 
@@ -30,6 +34,7 @@ class MainActivity : MainView, AppCompatActivity(), HasAndroidInjector, OnBaseEx
     override fun androidInjector(): AndroidInjector<Any> = dispatchingAndroidInjector
 
     private lateinit var exhangeRateRecyclerView: RecyclerView
+    private lateinit var loadingView: ProgressBar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidInjection.inject(this)
@@ -41,7 +46,7 @@ class MainActivity : MainView, AppCompatActivity(), HasAndroidInjector, OnBaseEx
 
     private fun initView() {
         exhangeRateRecyclerView = findViewById(R.id.recyclerCurrencies)
-       //adapter.setHasStableIds(true)
+        loadingView = findViewById(R.id.progressBar)
         exhangeRateRecyclerView.layoutManager = LinearLayoutManager(this)
         exhangeRateRecyclerView.adapter = adapter
         (exhangeRateRecyclerView.itemAnimator as SimpleItemAnimator).supportsChangeAnimations = false
@@ -57,15 +62,23 @@ class MainActivity : MainView, AppCompatActivity(), HasAndroidInjector, OnBaseEx
         adapter.notifyItemRangeChanged(1, list.size -1)
     }
 
-    override fun onAmountChanged(base: String, amount: Float) {
+    override fun onBaseChanged(base: String, amount: Float) {
         presenter.loadExchangeRate(base, amount)
     }
 
-    override fun showLoading() {
+    override fun onAmountChanged(amount: Float) {
+        presenter.updateBaseAmount(amount)
+    }
 
+    override fun showLoading() {
+        loadingView.visibility = VISIBLE
+    }
+
+    override fun hideLoading() {
+        loadingView.visibility = GONE
     }
 
     override fun showError() {
-
+        Snackbar.make( findViewById(android.R.id.content), "There is an error. Please try again later", Snackbar.LENGTH_LONG).show()
     }
 }
