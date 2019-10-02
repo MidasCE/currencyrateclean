@@ -26,5 +26,4 @@ class ExchangeRatePreferencesImpl(private val gson: Gson,
         return gson.fromJson(cachedData, ExchangeRateEntityResponse::class.java)
     }
 
-
 }
