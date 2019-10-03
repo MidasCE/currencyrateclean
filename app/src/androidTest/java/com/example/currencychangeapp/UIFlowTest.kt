@@ -36,6 +36,7 @@ class UIFlowTest {
 
     @Test
     fun checkWhenTapCurrency_BaseCurrencyChange() {
+        //TODO This test is rely on API. We need to have mock server to test this test case properly.
         Extension.waitUntilViewMatched(
             withId(R.id.recyclerCurrencies),
             matches(isDisplayed()),
@@ -51,6 +52,6 @@ class UIFlowTest {
             )
 
         onView(withRecyclerView(R.id.recyclerCurrencies)
-            .atPositionOnView(0, R.id.currencyNameTextView)).check(matches(isDisplayed()))
+            .atPositionOnView(0, R.id.currencyCodeTextView)).check(matches(withText("AUD")))
     }
 }
