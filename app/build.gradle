@@ -57,9 +57,11 @@ dependencies {
     testImplementation unitTestDependencies.mockito
     testImplementation unitTestDependencies.kluent
 
+    androidTestImplementation acceptanceTestDependencies.testCore
     androidTestImplementation acceptanceTestDependencies.testRunner
     androidTestImplementation acceptanceTestDependencies.testRules
     androidTestImplementation acceptanceTestDependencies.espressoCore
+    androidTestImplementation acceptanceTestDependencies.espressoContrib
+    androidTestImplementation acceptanceTestDependencies.espressoIdling
     androidTestImplementation acceptanceTestDependencies.espressoIntents
-    androidTestImplementation acceptanceTestDependencies.androidAnnotations
 }

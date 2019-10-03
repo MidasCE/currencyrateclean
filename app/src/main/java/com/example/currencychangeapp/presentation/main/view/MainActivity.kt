@@ -58,6 +58,7 @@ class MainActivity : MainView, AppCompatActivity(), HasAndroidInjector, OnBaseEx
     }
 
     override fun updateExchangeRate(list: List<ExchangeRateItemViewModel>) {
+        exhangeRateRecyclerView.visibility = VISIBLE
         adapter.updateRateItem(list)
         adapter.notifyItemRangeChanged(1, list.size -1)
     }

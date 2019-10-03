@@ -30,8 +30,8 @@ ext {
     kluent_version = '1.14'
 
     //Acceptance Testing
-    runner_version = '1.1.1'
-    espresso_version = '3.1.1'
+    runner_version = '1.0.0'
+    espresso_version = '3.1.0'
 
     mainApplication = [
             parcelerApi             : "org.parceler:parceler-api:$parceler_version",
@@ -65,10 +65,12 @@ ext {
     ]
 
     acceptanceTesting = [
-            testRunner        : "com.android.support.test:runner:$runner_version",
-            testRules         : "com.android.support.test:rules:$runner_version",
-            espressoCore      : "com.android.support.test.espresso:espresso-core:$espresso_version",
-            espressoIntents   : "com.android.support.test.espresso:espresso-intents:$espresso_version",
-            androidAnnotations: "com.android.support:support-annotations:$appCompat_version",
+            testCore          : "androidx.test:core:$runner_version",
+            testRunner        : "androidx.test:runner:$runner_version",
+            testRules         : "androidx.test:rules:$runner_version",
+            espressoCore      : "androidx.test.espresso:espresso-core:$espresso_version",
+            espressoContrib   : "androidx.test.espresso:espresso-contrib:$espresso_version",
+            espressoIntents   : "androidx.test.espresso:espresso-intents:$espresso_version",
+            espressoIdling    : "androidx.test.espresso:espresso-idling-resource:$espresso_version"
     ]
 }
